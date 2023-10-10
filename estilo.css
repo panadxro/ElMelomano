@@ -1,0 +1,306 @@
+/* @import url(estilo.css); */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap');
+
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Divide el ancho en 1/3 y 2/3 */
+  grid-template-rows: 0.9fr auto; /* Rows automático, 1 fracción, y automático */
+  grid-template-areas:
+      "header main"
+      "footer footer";
+  min-height: 100vh;
+  color: white;
+  max-height: 100vh;
+  position: relative;
+}
+.box {
+  border-radius: .5em;
+  background-color: #1a1a1a;
+  padding: 1em;
+}
+
+
+header {
+  grid-area: header;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+header .box {
+  margin: .5em;
+  height: 5rem;
+  padding: 1em 2em;
+}
+header ul {
+  list-style: none;
+  width: 100%;
+
+}
+nav ul li {
+  margin-bottom: 1em;
+  padding: .2em;
+}
+nav li a{
+  display: inline;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: white;
+  margin-bottom: .5em;
+}
+header nav ul li a span{
+  width: 100%;
+  display: block;
+}
+header nav ul li a span::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('img/plus.png');
+  background-size: cover; 
+  margin-right: 1em;
+  top: 2px;
+  position: relative;
+}
+header nav ul li:nth-child(2) a span::before {
+  background-image: url('img/recargar.png'); 
+}
+header .informacion {
+  margin: 0 .5em .5em .5em;
+  flex:1;
+  overflow: hidden;
+}
+.libreria {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+.libreria h1{
+  font-size: 1.3em;
+  padding-top: .5em;
+  position: relative;
+}
+.libreria h1::before {
+  content: '';
+  background-image: url(img/disco.png);
+  background-size: cover;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 1em;
+  top: 2px;
+  position: relative;
+}
+.libreria button{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  overflow: hidden;
+  width: 45px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 2em;
+}
+.libreria button:hover{
+  background-color: rgba(255, 255, 255, .03);
+
+}
+.libreria button img{
+  width: 100%;
+}
+#info {
+  height: 80%;
+  overflow: overlay;
+}
+#info ul {
+  list-style: none;
+}
+.lista-album {
+  display: flex;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: .5em;
+}
+.lista-album:hover {
+  background-color: rgba(255, 255, 255, .03);
+}
+.lista-album figure {
+  background-color: #555;
+  border-radius: .3em;
+  width: 50px;
+}
+.lista-album figcaption {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+}
+.lista-album figcaption span {
+  font-weight: normal;
+  padding-top: .3em;
+  font-size: .9em;
+}
+/* Main */
+main {
+  grid-area: main;
+  padding: 20px;
+  margin: .5em .5em .5em 0;
+  overflow: auto;
+}
+
+.info-album {
+  display: flex;
+  margin: 4em auto 3em auto;
+  width: 90%;
+}
+.descripcion {
+  margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.descripcion span {
+  font-size: .8em;
+}
+.descripcion h2 {
+  font-size: 3em;
+  margin-block: .5em;
+}
+.descripcion ul li{
+  display: inline;
+}
+.portada {
+  overflow: hidden;
+  width: 15rem;
+  aspect-ratio: 1 / 1;
+  margin-right: 1em;
+}
+.portada img {
+  width: 100%;
+}
+
+.duracionMayor {
+  color: red;
+}
+/* Pistas */
+.pistas h3 {
+  font-size: .8em;
+  font-weight: normal;
+  margin: 1em auto;
+  display: flex;
+  justify-content: space-between;
+  left: 10;
+  width: 90%;
+}
+.tabla::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: #3e3e3e;
+  margin-top: 1em;
+}
+.pistas h3::after {
+  content: '';
+  background-image: url('img/reloj.png');
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+  background-size: cover;
+}
+
+.pistas ol li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 1em auto;
+}
+.pistas p {
+  font-size: .8em;
+  line-height: 1.5em;
+}
+
+/* Scroll */
+.box::-webkit-scrollbar {
+  width: 12px;
+}
+.box::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+.box::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+}
+.box::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+#info::-webkit-scrollbar {
+  width: 12px;
+}
+#info::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+#info::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+}
+#info::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+
+/* Footer */
+footer {
+  grid-area: footer;
+  color: white;
+  padding: 10px;
+  max-height: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
+footer article {
+  display: flex;
+}
+footer .mini {
+  width: 50px;
+  background-color: #cf0e0e;
+  border-radius: .3em;
+}
+footer h3 {
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+footer h3 span {
+  font-weight: lighter;
+  font-size: .8em;
+  margin-top: .4em;
+}
+footer figure {
+  overflow: hidden;
+  width: 90px;
+}
+footer figure img {
+  width: 100%;
+}
+
