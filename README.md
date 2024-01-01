@@ -1,4 +1,4 @@
-#El Melomano - Aplicación para crear albums de música
+# El Melomano - Aplicación para crear albums de música
 
 Este proyecto es una aplicación que te permite crear álbumes de música y visualizarlos, aunque no permite la reproducción de música.
 
