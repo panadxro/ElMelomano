@@ -46,4 +46,3 @@ Este proyecto es una aplicación que te permite crear álbumes de música y visu
 Para cualquier pregunta o problema relacionado con el proyecto, ponte en contacto conmigo:
 
 - [Correo Electrónico](mailto:lucasn.panadero@gmail.com)
-- [Instagram](https://www.instagram.com/panadxro/)
