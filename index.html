@@ -1,81 +1,90 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Programación I | Parcial 1 | APELLIDO, NOMBRE | APELLDIO, NOMBRE</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
-        <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="stylesheet" href="estilo.css"/>
-    </head>
-    <body>
-      <header>
-        <nav class="box">
-          <ul>
-            <li><a href="#" onclick="Cargar();"><span>Cargar</span></a></li>
-            <li><a href="#" onclick="Mostrar();"><span>Mostrar</span></a></li>
-          </ul>
-        </nav>
-        <div class="box informacion">
-          <div class="libreria">
-            <h1>Librería<span id="cantidadDiscos">(1)</span></h1>
-            <button onclick="Buscar()"><img src="img/search.png" alt="Botón de búsqueda"></button>
-          </div>
-          <div id="info">
-            <ul id="lista-libreria">
-              <li onclick="" class="lista-album">
-                <figure class="mini portada" style="background-color: #FF0;"></figure>
-                <figcaption>Amor Amarillo <br><span>Gustavo Cerati</span></figcaption>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Programación</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+    <script src="js/carrito.js" defer></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+  </head>
+  <body>
+    <div id="app" class="relative h-screen p-2 gap-2 flex items-stretch">
+      <aside class="[grid-area:aside] flex-col flex overflow-y-auto">
+        <nav class="flex flex-col flex-1 gap-2">
+          <div class="bg-zinc-900 rounded-lg p-2">
+            <ul>
+              <li>
+                <a 
+                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
+                  href="#"> 
+                  <small></small>
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a 
+                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
+                  href="#"> 
+                  <small></small>
+                  Buscar
+                </a>
               </li>
             </ul>
           </div>
-        </div>
-      </header>
-      <main class="box album">
-        <div id="jsAlbum">
-          <section class="info-album">
-            <figure class="portada" style="background-color: #FF0;"></figure>
-            <article class="descripcion">
-              <span>Album</span>
-              <h2>Amor Amarillo</h2>
-              <ul>
-                <li>Gustavo Cerati.</li>
-                <li>11 canciones,</li>
-                <li>54 min 15 seg</li>
-              </ul>
-            </article>
-          </section>
-          <section class="pistas">
-            <div class="tabla">
-              <h3>Titulo</h3>
-            </div>
-            <ol>
-              <li>Amor Amarillo<span>5:36</span></li>
-              <li>Lisa<span>4:25</span></li>
-              <li>Te Llevo para Que Me Lleves<span>3:44</span></li>
-              <li>Pulsar<span>4:54</span></li>
-              <li>Cabeza De Medusa<span>5:07</span></li>
-              <li>Av. Alcorta<span>4:44</span></li>
-              <li>Bajan<span>4:08</span></li>
-              <li>Rombos (Un Cuarto Lleno de Rombos)<span>4:23</span></li>
-              <li>Ahora Es Nunca<span>4:42</span></li>
-              <li>A Merced<span>6:28</span></li>
-              <li>Torteval<span>6:04</span></li>
-            </ol>
-            <p>Código: FF0</p>
-            <p>Promedio por cancion: 296 seg</p>
-            <p>Pista mas extensa: A Merced (6 min)</p>
-          </section>
+          <div class="bg-zinc-900 rounded-lg p-2 flex-1">
+            <ul>
+              <li>
+                <a 
+                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
+                  href="#"> 
+                  <small></small>
+                  Tu biblioteca
+                </a>
+              </li>
+            </ul>
+            <a class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
+              <picture class="h-12 w-12 flex-none">
+                <img src="" alt="" class="object-cover w-full h-full rounded-md">
+              </picture>
+              <div class="flex flex-auto flex-col truncate">
+                <h4 class="text-white text-sm">
+                  {{ titulo }}
+                </h4>
+                <span class="text-xs text-gray-400">
+                  {{ artista }}
+                </span>
+              </div>
+            </a>
+          </div>
+        </nav>
+      </aside>
+      <main class="[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto">
+        <div class="relative z-10 px-6">
+          <h1 class="text-xl">Buenos días</h1>
+          <div class="flex flex-wrap mt-6 gap-4">
+            <a class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
+              <picture class="aspect-square w-full h-auto flex-none">
+                <img src="" alt="" class="object-cover w-full h-full rounded-md">
+              </picture>
+              <div class="flex flex-auto flex-col truncate">
+                <h4 class="text-white text-sm">
+                  {{ titulo }}
+                </h4>
+                <span class="text-xs text-gray-400">
+                  {{ artista }}
+                </span>
+              </div>
+            </a>
+          </div>
+
         </div>
       </main>
-      <footer>
-        <article>
-          <div class="mini portada"></div>
-          <h3>Lucas Panadero <br><span>DWT2AP</span></h3>
-        </article>
-        <figure>
-          <img src="img/davincilogo.png" alt="DaVinci Escuela Multimedial">
-        </figure>
+      <footer class="[grid-area:player] min-h-[100px]">
+        FOOTER
       </footer>
-      <script src="parcial.js"></script>
-    </body>
+    </div>
+  </body>
 </html>
