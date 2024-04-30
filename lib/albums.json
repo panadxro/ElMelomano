@@ -1,85 +1,85 @@
 {
   "albums": [
     {
+      "id": 1,
       "titulo": "Soda Stereo",
-      "lanzamiento": "1984",
       "artista": "Soda Stereo",
       "imagen": "cover/soda_stereo.jpg",
       "precio": 1500
     },
     {
+      "id": 2,
       "titulo": "After Chabón",
-      "lanzamiento": "1987",
       "artista": "Sumo",
       "imagen": "cover/after_chabon.jpg",
       "precio": 1800
     },
     {
+      "id": 3,
       "titulo": "Giros",
-      "lanzamiento": "1985",
       "artista": "Fito Páez",
       "imagen": "cover/giros.jpg",
       "precio": 2000
     },
     {
+      "id": 4,
       "titulo": "Clics Modernos",
-      "lanzamiento": "1983",
       "artista": "Charly García",
       "imagen": "cover/clics_modernos.jpg",
       "precio": 1700
     },
     {
+      "id": 5,
       "titulo": "Luzbelito",
-      "lanzamiento": "1996",
       "artista": "Patricio Rey y sus Redonditos de Ricota",
       "imagen": "cover/luzbelito.jpg",
       "precio": 1600
     },
     {
+      "id": 6,
       "titulo": "Almendra",
-      "lanzamiento": "1970",
       "artista": "Almendra",
       "imagen": "cover/almendra.jpg",
       "precio": 1500
     },
     {
+      "id": 7,
       "titulo": "Especial",
-      "lanzamiento": "1999",
       "artista": "Viejas Locas",
       "imagen": "cover/especial.jpg",
       "precio": 1600
     },
     {
+      "id": 8,
       "titulo": "Piano Bar",
-      "lanzamiento": "1984",
       "artista": "Charly García",
       "imagen": "cover/piano_bar.jpg",
       "precio": 1800
     },
     {
+      "id": 9,
       "titulo": "Oktubre",
-      "lanzamiento": "1986",
       "artista": "Patricio Rey y sus Redonditos de Ricota",
       "imagen": "cover/oktubre.jpg",
       "precio": 1700
     },
     {
+      "id": 10,
       "titulo": "Civilización",
-      "lanzamiento": "2007",
       "artista": "Los Piojos",
       "imagen": "cover/civilizacion.jpg",
       "precio": 1900
     },
     {
+      "id": 11,
       "titulo": "Bocanada",
-      "lanzamiento": "1999",
       "artista": "Gustavo Cerati",
       "imagen": "cover/bocanada.jpg",
       "precio": 2000
     },
     {
+      "id": 12,
       "titulo": "Artaud",
-      "lanzamiento": "1973",
       "artista": "Pescado Rabioso",
       "imagen": "cover/artaud.jpg",
       "precio": 1800

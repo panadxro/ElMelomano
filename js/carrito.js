@@ -1,21 +1,20 @@
 const app = Vue.createApp({
   data() {
       return {
-          categorias: ['audio', 'pc', 'teclados'],
           albums: [],
           carrito: []
       }
   },
   created(){
-      console.log('Creacion de Vue :D');
       this.getJSON();
       this.leerLocal();
+      this.leerCarritoLocal();
   },
   computed: {
     totalCarrito() {
       let total = 0;
       this.carrito.forEach(item => {
-        total += item.price * item.cantidad;
+        total += item.precio * item.cantidad;
       });
       return total;
     }
@@ -24,12 +23,11 @@ const app = Vue.createApp({
     async getJSON(){
         const resp = await fetch('/lib/albums.json');
         const json = await resp.json();
-        console.log(json);
         this.albums = json.albums;
+        console.log(`$json`);
     },
     agregarCarrito(id){
-        const album =this.albums.find(item => item.id == id)
-
+        const album = this.albums.find(item => item.id == id)
         if (album) {
           const index = this.carrito.findIndex(item => item.id === id);
           if (index !== -1) {
@@ -38,7 +36,6 @@ const app = Vue.createApp({
               const albumCarrito = {
                   id: album.id,
                   titulo: album.titulo,
-                  lanzamiento: album.lanzamiento,
                   artista: album.artista,
                   precio: album.precio,
                   imagen: album.imagen,
@@ -56,6 +53,10 @@ const app = Vue.createApp({
     leerLocal() {
         const storage = JSON.parse(localStorage.getItem('albums'));
         this.albums = storage ? storage : [];
+    },
+    leerCarritoLocal() {
+      const carritoStorage = JSON.parse(localStorage.getItem('carrito'));
+      this.carrito = carritoStorage ? carritoStorage : [];
     },
     guardarCarrito(){
         localStorage.setItem('carrito', JSON.stringify(this.carrito));

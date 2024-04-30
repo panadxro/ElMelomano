@@ -10,3 +10,74 @@ html {
   grid-template-columns: 350px 1fr;
   grid-template-rows: 1fr auto;
 }
+.inicio::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('/img/home.png');
+  background-size: contain;
+  top: 2px;
+  position: relative;
+}
+.busqueda::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('/img/search.png');
+  background-size: contain;
+  top: 2px;
+  position: relative;
+}
+.carrito::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('/img/cart.png');
+  background-size: contain;
+  top: 2px;
+  position: relative;
+}
+.remove {
+  display: block;
+  background-image: url('/img/remove.png');
+  background-size: contain;
+}
+.aside-carrito {
+  max-height: 80%;
+}
+
+.lista-carrito {
+  overflow-y: auto;
+  max-height: 65%;
+  padding-bottom: 20rem;
+}
+/* Scroll */
+main::-webkit-scrollbar {
+  width: 12px;
+}
+main::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+main::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+}
+main::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+.lista-carrito::-webkit-scrollbar {
+  width: 12px;
+}
+.lista-carrito::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+.lista-carrito::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 1rem;
+}
+.lista-carrito::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}

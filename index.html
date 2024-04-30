@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Programación</title>
+    <title>El Melomano | Carrito de Compras Vue</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/img/icon.png" />
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com" defer></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
@@ -12,78 +12,81 @@
   </head>
   <body>
     <div id="app" class="relative h-screen p-2 gap-2 flex items-stretch">
-      <aside class="[grid-area:aside] flex-col flex overflow-y-auto">
+      <aside class="[grid-area:aside] flex-col flex overflow-y-hidden">
         <nav class="flex flex-col flex-1 gap-2">
           <div class="bg-zinc-900 rounded-lg p-2">
             <ul>
               <li>
                 <a 
-                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
-                  href="#"> 
-                  <small></small>
-                  Inicio
+                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="inicio"></small>Inicio
                 </a>
               </li>
               <li>
                 <a 
-                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
-                  href="#"> 
-                  <small></small>
-                  Buscar
+                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="busqueda"></small>Buscar
                 </a>
               </li>
             </ul>
           </div>
-          <div class="bg-zinc-900 rounded-lg p-2 flex-1">
+          <div class="aside-carrito bg-zinc-900 rounded-lg p-2 flex-1 overflow-y-hidden h-full">
             <ul>
               <li>
                 <a 
-                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
-                  href="#"> 
-                  <small></small>
-                  Tu biblioteca
+                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><small class="carrito"></small>Tu carrito ${{ totalCarrito }}
                 </a>
               </li>
             </ul>
-            <a 
-              v-for="(item, index) in carrito"
-              class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
-              <picture class="h-12 w-12 flex-none">
-                <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
-              </picture>
-              <div class="flex flex-auto flex-col truncate">
-                <h4 class="text-white text-sm">
-                  {{ item.titulo }}
-                </h4>
-                <span class="text-xs text-gray-400">
-                  {{ item.artista }}
-                </span>
-              </div>
-            </a>
+            <div class="lista-carrito overflow-y-auto pb-6">
+
+              <article v-for="(item, index) in carrito" class="group relative">
+                <div class="absolute right-4 botton-20 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-4 group-hover:opacity-100 z-10">
+                  <button v-on:click="eliminarCarrito(index)" type="button" class="remove card-play-button h-8 w-8 p-4 rounded-full bg-red-500"></button>
+                </div>
+                <a
+                  class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
+                  <picture class="h-12 w-12 flex-none">
+                    <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
+                  </picture>
+                  <div class="flex flex-auto flex-col truncate">
+                    <h4 class="text-white text-sm">{{ item.titulo }} x{{ item.cantidad }}</h4>
+                    <span class="text-xs text-gray-400">{{ item.artista }} ${{ item.precio }}</span>
+                  </div>
+                </a>
+              </article>
+
+            </div>
           </div>
         </nav>
       </aside>
-      <main class="[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto">
+      <main class="[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto pb-6">
         <div class="relative z-10 px-6 pt-10">
-          <h1 class="text-xl font-bold">Buenos días</h1>
+          <h1 class="text-xl font-bold text-white">El Melomano | Tienda de musica online Vue</h1>
           <div class="flex flex-wrap mt-6 gap-4">
-            <a 
-              v-for="(item, index) in albums" 
-              class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
-              <picture class="aspect-square w-full h-auto flex-none">
-                <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
-              </picture>
-              <div class="flex flex-auto flex-col px-2 truncate">
-                <h4 class="text-white text-sm">{{ item.titulo }}</h4>
-                <span class="text-xs text-gray-400">{{ item.artista }}</span>
+            <article 
+              v-for="(item, index) in albums"
+              class="group relative"
+            >
+              <div class="absolute w-full left-7 botton-20 translate-y-20 transition-all duration-500 opacity-0 group-hover:translate-y-28 group-hover:opacity-100 z-10">
+                <button v-on:click="agregarCarrito(item.id)" type="button" class="card-play-button text-xs font-bold rounded-full bg-green-500 p-2">Agregar al carrito</button>
               </div>
-            </a>
+              <a            
+                class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
+                <picture class="aspect-square w-full h-auto flex-none">
+                  <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
+                </picture>
+                <div class="flex flex-auto flex-col px-2 truncate">
+                  <h4 class="text-white text-sm">{{ item.titulo }}</h4>
+                  <span class="text-xs text-gray-400">{{ item.artista }} ${{ item.precio }}</span>
+                </div>
+              </a>
+            </article>
+
           </div>
 
         </div>
       </main>
-      <footer class="[grid-area:player] min-h-[100px]">
-        FOOTER
+      <footer class="[grid-area:player] min-h-[25px] text-white text-center">
+        <p>DV | Aplicaciones para dispositivos Moviles | Panadero Lucas</p>
       </footer>
     </div>
   </body>
