@@ -1,87 +1,87 @@
 {
   "albums": [
     {
-      "nombre": "Soda Stereo",
+      "titulo": "Soda Stereo",
       "lanzamiento": "1984",
       "artista": "Soda Stereo",
-      "imagen": "images/soda_stereo.jpg",
+      "imagen": "cover/soda_stereo.jpg",
       "precio": 1500
     },
     {
-      "nombre": "After Chabón",
+      "titulo": "After Chabón",
       "lanzamiento": "1987",
       "artista": "Sumo",
-      "imagen": "images/after_chabon.jpg",
+      "imagen": "cover/after_chabon.jpg",
       "precio": 1800
     },
     {
-      "nombre": "Giros",
+      "titulo": "Giros",
       "lanzamiento": "1985",
       "artista": "Fito Páez",
-      "imagen": "images/giros.jpg",
+      "imagen": "cover/giros.jpg",
       "precio": 2000
     },
     {
-      "nombre": "Clics Modernos",
+      "titulo": "Clics Modernos",
       "lanzamiento": "1983",
       "artista": "Charly García",
-      "imagen": "images/clics_modernos.jpg",
+      "imagen": "cover/clics_modernos.jpg",
       "precio": 1700
     },
     {
-      "nombre": "Luzbelito",
+      "titulo": "Luzbelito",
       "lanzamiento": "1996",
       "artista": "Patricio Rey y sus Redonditos de Ricota",
-      "imagen": "images/luzbelito.jpg",
+      "imagen": "cover/luzbelito.jpg",
       "precio": 1600
     },
     {
-      "nombre": "Almendra",
+      "titulo": "Almendra",
       "lanzamiento": "1970",
       "artista": "Almendra",
-      "imagen": "images/almendra.jpg",
+      "imagen": "cover/almendra.jpg",
       "precio": 1500
     },
     {
-      "nombre": "Especial",
+      "titulo": "Especial",
       "lanzamiento": "1999",
       "artista": "Viejas Locas",
-      "imagen": "images/especial.jpg",
+      "imagen": "cover/especial.jpg",
       "precio": 1600
     },
     {
-      "nombre": "Piano Bar",
+      "titulo": "Piano Bar",
       "lanzamiento": "1984",
       "artista": "Charly García",
-      "imagen": "images/piano_bar.jpg",
+      "imagen": "cover/piano_bar.jpg",
       "precio": 1800
     },
     {
-      "nombre": "Oktubre",
+      "titulo": "Oktubre",
       "lanzamiento": "1986",
       "artista": "Patricio Rey y sus Redonditos de Ricota",
-      "imagen": "images/oktubre.jpg",
+      "imagen": "cover/oktubre.jpg",
       "precio": 1700
     },
     {
-      "nombre": "Civilización",
+      "titulo": "Civilización",
       "lanzamiento": "2007",
       "artista": "Los Piojos",
-      "imagen": "images/civilizacion.jpg",
+      "imagen": "cover/civilizacion.jpg",
       "precio": 1900
     },
     {
-      "nombre": "Bocanada",
+      "titulo": "Bocanada",
       "lanzamiento": "1999",
       "artista": "Gustavo Cerati",
-      "imagen": "images/bocanada.jpg",
+      "imagen": "cover/bocanada.jpg",
       "precio": 2000
     },
     {
-      "nombre": "Artaud",
+      "titulo": "Artaud",
       "lanzamiento": "1973",
       "artista": "Pescado Rabioso",
-      "imagen": "images/artaud.jpg",
+      "imagen": "cover/artaud.jpg",
       "precio": 1800
     }
   ]

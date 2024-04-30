@@ -2,7 +2,7 @@ const app = Vue.createApp({
   data() {
       return {
           categorias: ['audio', 'pc', 'teclados'],
-          productos: [],
+          albums: [],
           carrito: []
       }
   },
@@ -22,28 +22,29 @@ const app = Vue.createApp({
   },
   methods: {
     async getJSON(){
-        const resp = await fetch('products.json');
+        const resp = await fetch('/lib/albums.json');
         const json = await resp.json();
         console.log(json);
-        this.productos = json.lista;
+        this.albums = json.albums;
     },
     agregarCarrito(id){
-        const producto =this.productos.find(item => item.id == id)
+        const album =this.albums.find(item => item.id == id)
 
-        if (producto) {
+        if (album) {
           const index = this.carrito.findIndex(item => item.id === id);
           if (index !== -1) {
               this.carrito[index].cantidad++;
           } else {
-              const productoCarrito = {
-                  id: producto.id,
-                  name: producto.name,
-                  price: producto.price,
-                  img: producto.img,
-                  categoria: producto.category,
+              const albumCarrito = {
+                  id: album.id,
+                  titulo: album.titulo,
+                  lanzamiento: album.lanzamiento,
+                  artista: album.artista,
+                  precio: album.precio,
+                  imagen: album.imagen,
                   cantidad: 1
               };
-              this.carrito.push(productoCarrito);
+              this.carrito.push(albumCarrito);
           }
           this.guardarCarrito();
         }
@@ -53,8 +54,8 @@ const app = Vue.createApp({
       this.guardarCarrito();
     },
     leerLocal() {
-        const storage = JSON.parse(localStorage.getItem('productos'));
-        this.productos = storage ? storage : [];
+        const storage = JSON.parse(localStorage.getItem('albums'));
+        this.albums = storage ? storage : [];
     },
     guardarCarrito(){
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
