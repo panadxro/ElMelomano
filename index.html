@@ -17,23 +17,17 @@
           <div class="bg-zinc-900 rounded-lg p-2">
             <ul>
               <li>
-                <a 
-                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="inicio"></small>Inicio
-                </a>
+                <a class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="inicio"></small>Inicio</a>
               </li>
               <li>
-                <a 
-                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="busqueda"></small>Buscar
-                </a>
+                <a class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="busqueda"></small>Buscar</a>
               </li>
             </ul>
           </div>
           <div class="aside-carrito bg-zinc-900 rounded-lg p-2 flex-1 overflow-y-hidden h-full">
             <ul>
               <li>
-                <a 
-                  class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><small class="carrito"></small>Tu carrito ${{ totalCarrito }}
-                </a>
+                <p class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><small class="carrito"></small>Tu carrito ${{ totalCarrito }}</p>
               </li>
             </ul>
             <div class="lista-carrito overflow-y-auto pb-6">
@@ -42,16 +36,16 @@
                 <div class="absolute right-4 botton-20 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-4 group-hover:opacity-100 z-10">
                   <button v-on:click="eliminarCarrito(index)" type="button" class="remove card-play-button h-8 w-8 p-4 rounded-full bg-red-500"></button>
                 </div>
-                <a
+                <div
                   class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
                   <picture class="h-12 w-12 flex-none">
                     <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
                   </picture>
                   <div class="flex flex-auto flex-col truncate">
-                    <h4 class="text-white text-sm">{{ item.titulo }} x{{ item.cantidad }}</h4>
+                    <h3 class="text-white text-sm">{{ item.titulo }} x{{ item.cantidad }}</h3>
                     <span class="text-xs text-gray-400">{{ item.artista }} ${{ item.precio }}</span>
                   </div>
-                </a>
+                </div>
               </article>
 
             </div>
@@ -60,7 +54,7 @@
       </aside>
       <main class="[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto pb-6">
         <div class="relative z-10 px-6 pt-10">
-          <h1 class="text-xl font-bold text-white">El Melomano | Tienda de musica online Vue</h1>
+          <h1 class="text-xl font-bold text-white">El Melomano | Tienda de musica online con Vue</h1>
           <div class="flex flex-wrap mt-6 gap-4">
             <article 
               v-for="(item, index) in albums"

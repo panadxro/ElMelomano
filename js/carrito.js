@@ -24,7 +24,7 @@ const app = Vue.createApp({
         const resp = await fetch('/lib/albums.json');
         const json = await resp.json();
         this.albums = json.albums;
-        console.log(`$json`);
+        console.log('Albums cargados');
     },
     agregarCarrito(id){
         const album = this.albums.find(item => item.id == id)
@@ -44,11 +44,14 @@ const app = Vue.createApp({
               this.carrito.push(albumCarrito);
           }
           this.guardarCarrito();
+          console.log(album.titulo + ' cargado en el carrito.')
         }
     },
     eliminarCarrito(index) {
+      const albumEliminado = this.carrito[index].titulo;
       this.carrito.splice(index, 1);
       this.guardarCarrito();
+      console.log(albumEliminado + ' eliminado del carrito.')
     },
     leerLocal() {
         const storage = JSON.parse(localStorage.getItem('albums'));
@@ -60,7 +63,6 @@ const app = Vue.createApp({
     },
     guardarCarrito(){
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
-        console.log(this.carrito)
     }
   }
 })
