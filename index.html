@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com" defer></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
-    <script src="js/carrito.js" defer></script>
+    <script src="js/app.js" defer></script>
   </head>
   <body>
     <div id="app" class="relative h-screen p-2 gap-2 flex items-stretch">
@@ -25,14 +25,14 @@
             </ul>
           </div>
           <div class="aside-carrito bg-zinc-900 rounded-lg p-2 flex-1 overflow-y-hidden h-full">
-            <ul>
+<!--             <ul>
               <li>
                 <p class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><small class="carrito"></small>Tu carrito ${{ totalCarrito }}</p>
               </li>
-            </ul>
+            </ul> -->
             <div class="lista-carrito overflow-y-auto pb-6">
 
-              <article v-for="(item, index) in carrito" class="group relative">
+<!--               <article v-for="(item, index) in carrito" class="group relative">
                 <div class="absolute right-4 botton-20 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-4 group-hover:opacity-100 z-10">
                   <button v-on:click="eliminarCarrito(index)" type="button" class="remove card-play-button h-8 w-8 p-4 rounded-full bg-red-500"></button>
                 </div>
@@ -46,14 +46,31 @@
                     <span class="text-xs text-gray-400">{{ item.artista }} ${{ item.precio }}</span>
                   </div>
                 </div>
-              </article>
+              </article> -->
 
             </div>
           </div>
         </nav>
       </aside>
       <main class="[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto pb-6">
-        <div class="relative z-10 px-6 pt-10">
+        <h1>Buscar Álbumes de Música</h1>
+        <form v-on:submit.prevent="searchAlbum">
+          <input type="text" v-model="query" placeholder="Ingresa el título del álbum">
+          <button type="submit">Buscar</button>
+        </form>
+        <div v-if="error" class="error">{{ error }}</div>
+        <div v-if="albums.length > 0">
+            <h2>Resultados de la búsqueda:</h2>
+            <div v-for="album in albums" class="album">
+              <img :src="album.cover" alt="Album Cover">
+              <div>
+                  <h3>{{ album.title }}</h3>
+                  <p>{{ album.artist }}</p>
+                  <p>{{ album.year }}</p>
+              </div>
+          </div>
+        </div>
+        <!-- <div class="relative z-10 px-6 pt-10">
           <h1 class="text-xl font-bold text-white">El Melomano | Tienda de musica online con Vue</h1>
           <div class="flex flex-wrap mt-6 gap-4">
             <article 
@@ -77,7 +94,7 @@
 
           </div>
 
-        </div>
+        </div> -->
       </main>
       <footer class="[grid-area:player] min-h-[25px] text-white text-center">
         <p>DV | Aplicaciones para dispositivos Moviles | Panadero Lucas</p>
