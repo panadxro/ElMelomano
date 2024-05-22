@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="/img/icon.png" />
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
     <script src="js/app.js" defer></script>
   </head>
@@ -15,86 +16,101 @@
       <aside class="[grid-area:aside] flex-col flex overflow-y-hidden">
         <nav class="flex flex-col flex-1 gap-2">
           <div class="bg-zinc-900 rounded-lg p-2">
-            <ul>
-              <li>
-                <a class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="inicio"></small>Inicio</a>
-              </li>
-              <li>
-                <a class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300" href="#"><small class="busqueda"></small>Buscar</a>
-              </li>
-            </ul>
+            <button 
+              v-on:click="changeMode('explore')"
+              :class="{'active': mode === 'explore'}" 
+              class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
+              ><i class="fa-solid fa-house"></i>Inicio
+            </button>
+            <button 
+              v-on:click="changeMode('search')"
+              :class="{'active': mode === 'search'}"
+              class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
+              ><i class="fa-solid fa-magnifying-glass"></i>Buscar
+            </button>
           </div>
           <div class="aside-carrito bg-zinc-900 rounded-lg p-2 flex-1 overflow-y-hidden h-full">
-<!--             <ul>
-              <li>
-                <p class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><small class="carrito"></small>Tu carrito ${{ totalCarrito }}</p>
-              </li>
-            </ul> -->
+            <h2 class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><i class="fa-solid fa-bookmark"></i>Mis favoritos </h2>
             <div class="lista-carrito overflow-y-auto pb-6">
-
-<!--               <article v-for="(item, index) in carrito" class="group relative">
-                <div class="absolute right-4 botton-20 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-4 group-hover:opacity-100 z-10">
-                  <button v-on:click="eliminarCarrito(index)" type="button" class="remove card-play-button h-8 w-8 p-4 rounded-full bg-red-500"></button>
-                </div>
+              <article v-for="(album, index) in favs" class="group relative">
                 <div
-                  class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
-                  <picture class="h-12 w-12 flex-none">
-                    <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
-                  </picture>
-                  <div class="flex flex-auto flex-col truncate">
-                    <h3 class="text-white text-sm">{{ item.titulo }} x{{ item.cantidad }}</h3>
-                    <span class="text-xs text-gray-400">{{ item.artista }} ${{ item.precio }}</span>
-                  </div>
+                class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
+                <picture class="h-12 w-12 flex-none">
+                  <img v-bind:src="album.cover" v-bind:alt="album.title" class="object-cover w-full h-full rounded-md">
+                </picture>
+                <div class="flex flex-auto flex-col truncate">
+                  <h3 class="text-white text-sm">{{ album.title }}</h3>
+                  <span class="text-xs text-gray-400">{{ album.artist }} {{ album.year }}</span>
                 </div>
-              </article> -->
+                <div class="absolute right-4 bottom-8 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-4 group-hover:opacity-100 z-10">
+                  <button v-on:click="agregarFavorito(album.id)" type="button" class="remove card-play-button text-gray-400"><i
+                    :class="isFav(album.id) ? 'fa-solid' : 'fa-regular'"
+                    class="fa-heart"></i></button>
+                </div>
+              </div>
+              </article>
 
             </div>
           </div>
         </nav>
       </aside>
+
       <main class="[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto pb-6">
-        <h1>Buscar Álbumes de Música</h1>
-        <form v-on:submit.prevent="searchAlbum">
-          <input type="text" v-model="query" placeholder="Ingresa el título del álbum">
-          <button type="submit">Buscar</button>
-        </form>
-        <div v-if="error" class="error">{{ error }}</div>
-        <div v-if="albums.length > 0">
-            <h2>Resultados de la búsqueda:</h2>
-            <div v-for="album in albums" class="album">
-              <img :src="album.cover" alt="Album Cover">
-              <div>
-                  <h3>{{ album.title }}</h3>
-                  <p>{{ album.artist }}</p>
-                  <p>{{ album.year }}</p>
-              </div>
-          </div>
-        </div>
-        <!-- <div class="relative z-10 px-6 pt-10">
-          <h1 class="text-xl font-bold text-white">El Melomano | Tienda de musica online con Vue</h1>
+        <div v-if="mode === 'explore'" class="relative z-10 px-6 pt-10">
+          <h1 class="text-xl font-bold text-white">Explorar</h1>
           <div class="flex flex-wrap mt-6 gap-4">
             <article 
-              v-for="(item, index) in albums"
+              v-for="album in albums"
               class="group relative"
             >
               <div class="absolute w-full left-7 botton-20 translate-y-20 transition-all duration-500 opacity-0 group-hover:translate-y-28 group-hover:opacity-100 z-10">
-                <button v-on:click="agregarCarrito(item.id)" type="button" class="card-play-button text-xs font-bold rounded-full bg-green-500 p-2">Agregar al carrito</button>
+                <button v-on:click="agregarFavorito(album.id)" type="button" class="card-play-button text-xs font-bold rounded-full bg-green-500 p-2"><i v-bind:class="isFav(album.id) ? 'fa-solid' : 'fa-regular'" class="fa-heart"></i></button>
               </div>
               <a            
                 class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
                 <picture class="aspect-square w-full h-auto flex-none">
-                  <img v-bind:src="item.imagen" v-bind:alt="item.titulo" class="object-cover w-full h-full rounded-md">
+                  <img v-bind:src="album.cover" v-bind:alt="album.title" class="object-cover w-full h-full rounded-md">
                 </picture>
                 <div class="flex flex-auto flex-col px-2 truncate">
-                  <h4 class="text-white text-sm">{{ item.titulo }}</h4>
-                  <span class="text-xs text-gray-400">{{ item.artista }} ${{ item.precio }}</span>
+                  <h4 class="text-white text-sm">{{ album.title }}</h4>
+                  <span class="text-xs text-gray-400">{{ album.artist }} - {{ album.year }}</span>
                 </div>
               </a>
             </article>
 
           </div>
 
-        </div> -->
+        </div>
+            
+        <div v-if="mode === 'search'" class="relative z-10 px-6 pt-10">
+          <form v-on:submit.prevent="searchAlbum">
+            <input class="mb-6 py-2 px-6 rounded-full w-80 bg-transparent border-2 text-white" id="buscar" type="search" v-model="query" placeholder="Ingresa el título del álbum">
+          </form>
+          <h1 class="text-xl font-bold text-white">Resultados</h1>
+          <h1 v-if="error" class="text-xl font-bold text-white">{{ error }}</h1>
+          <div v-if="albums.length > 0" class="flex flex-wrap mt-6 gap-4">
+            <article 
+              v-for="album in albums"
+              class="group relative"
+            >
+              <div class="absolute w-full left-7 botton-20 translate-y-20 transition-all duration-500 opacity-0 group-hover:translate-y-28 group-hover:opacity-100 z-10">
+                <button v-on:click="agregarFavorito(album.id)" type="button" class="card-play-button text-xs font-bold rounded-full bg-green-500 p-2"><i v-bind:class="isFav(album.id) ? 'fa-solid' : 'fa-regular'" class="fa-heart"></i></button>
+              </div>
+              <a            
+                class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
+                <picture class="aspect-square w-full h-auto flex-none">
+                  <img v-bind:src="album.cover" v-bind:alt="album.title" class="object-cover w-full h-full rounded-md">
+                </picture>
+                <div class="flex flex-auto flex-col px-2 truncate">
+                  <h4 class="text-white text-sm">{{ album.title }}</h4>
+                  <span class="text-xs text-gray-400">{{ album.artist }} - {{ album.year }}</span>
+                </div>
+              </a>
+            </article>
+
+          </div>
+
+        </div>
       </main>
       <footer class="[grid-area:player] min-h-[25px] text-white text-center">
         <p>DV | Aplicaciones para dispositivos Moviles | Panadero Lucas</p>
