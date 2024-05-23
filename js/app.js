@@ -3,9 +3,9 @@ const app = Vue.createApp({
       return {
         query: '',
         albums: [],
+        exploreAlbums: [],
         favs: [],
         error: '',
-        exploreAlbums: [],
         mode: 'explore'
       }
   },
@@ -67,7 +67,7 @@ const app = Vue.createApp({
           const result = await response.json();
           
           if (result.albums && result.albums.items.length > 0) {
-              this.albums = result.albums.items.map(item => ({
+              this.exploreAlbums  = result.albums.items.map(item => ({
                   id: item.data.uri,
                   title: item.data.name,
                   artist: item.data.artists.items[0].profile.name,
@@ -105,7 +105,10 @@ const app = Vue.createApp({
           this.favs.splice(albumIndex, 1);
         } else {
           // Si el álbum no está en favs, agregar
-          const album = this.albums.find(item => item.id === albumId);
+          let album = this.albums.find(item => item.id === albumId);
+          if (!album) {
+            album = this.exploreAlbums.find(item => item.id === albumId);
+          }  
           if (album) {
             this.favs.push(album);
           }

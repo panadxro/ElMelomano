@@ -60,14 +60,14 @@
           <h1 class="text-xl font-bold text-white">Explorar</h1>
           <div class="flex flex-wrap mt-6 gap-4">
             <article 
-              v-for="album in albums"
+              v-for="album in exploreAlbums"
               class="group relative"
             >
               <div class="absolute w-full left-7 botton-20 translate-y-20 transition-all duration-500 opacity-0 group-hover:translate-y-28 group-hover:opacity-100 z-10">
                 <button v-on:click="agregarFavorito(album.id)" type="button" class="card-play-button text-xs font-bold rounded-full bg-green-500 p-2"><i v-bind:class="isFav(album.id) ? 'fa-solid' : 'fa-regular'" class="fa-heart"></i></button>
               </div>
               <a            
-                class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
+                class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg w-40 flex-col">
                 <picture class="aspect-square w-full h-auto flex-none">
                   <img v-bind:src="album.cover" v-bind:alt="album.title" class="object-cover w-full h-full rounded-md">
                 </picture>
@@ -113,7 +113,7 @@
         </div>
       </main>
       <footer class="[grid-area:player] min-h-[25px] text-white text-center">
-        <p>DV | Aplicaciones para dispositivos Moviles | Panadero Lucas</p>
+        <p>DV | Progresive Web Applications | Panadero Lucas</p>
       </footer>
     </div>
   </body>
