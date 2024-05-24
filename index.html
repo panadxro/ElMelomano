@@ -19,37 +19,29 @@
             <button 
               v-on:click="changeMode('explore')"
               :class="{'active': mode === 'explore'}" 
-              class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
-              ><i class="fa-solid fa-house"></i>Inicio
+              class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300 "
+              ><i class="fa-solid fa-house"></i><span class="hidden sm:inline">Inicio</span>
             </button>
             <button 
               v-on:click="changeMode('search')"
               :class="{'active': mode === 'search'}"
               class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"
-              ><i class="fa-solid fa-magnifying-glass"></i>Buscar
+              ><i class="fa-solid fa-magnifying-glass"></i><span class="hidden sm:inline">Buscar</span>
             </button>
           </div>
           <div class="aside-carrito bg-zinc-900 rounded-lg p-2 flex-1 overflow-y-hidden h-full">
-            <h2 class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><i class="fa-solid fa-bookmark"></i>Mis favoritos </h2>
+            <h2 class="flex gap-4 text-zinc-400 hover:text-zinc-100 items-center py-3 px-5 font-medium transition duration-300"><i class="fa-solid fa-bookmark"></i><span class="hidden sm:inline">Mis favoritos</span></h2>
             <div class="lista-carrito overflow-y-auto pb-6">
-              <article v-for="(album, index) in favs" class="group relative">
-                <div
-                class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
-                <picture class="h-12 w-12 flex-none">
-                  <img v-bind:src="album.cover" v-bind:alt="album.title" class="object-cover w-full h-full rounded-md">
-                </picture>
-                <div class="flex flex-auto flex-col truncate">
-                  <h3 class="text-white text-sm">{{ album.title }}</h3>
-                  <span class="text-xs text-gray-400">{{ album.artist }} {{ album.year }}</span>
-                </div>
-                <div class="absolute right-4 bottom-8 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-4 group-hover:opacity-100 z-10">
-                  <button v-on:click="agregarFavorito(album.id)" type="button" class="remove card-play-button text-gray-400"><i
-                    :class="isFav(album.id) ? 'fa-solid' : 'fa-regular'"
-                    class="fa-heart"></i></button>
-                </div>
-              </div>
-              </article>
-
+              <favs 
+                v-for="(album, index) in favs"
+                v-bind:id="album.id"
+                v-bind:titulo="album.title"
+                v-bind:artista="album.artist"
+                v-bind:anio="album.year"
+                v-bind:portada="album.cover"
+                v-bind:es-favorito="isFav(album.id)"
+                v-on:agregar="agregarFavorito(album.id)">
+              </favs>
             </div>
           </div>
         </nav>
@@ -87,49 +79,6 @@
               </albums>
           </div>
         </div>
-            
-        <!-- <div v-if="mode === 'search'" class="relative z-10 px-6 pt-10">
-          <form v-on:submit.prevent="searchAlbum">
-            <input class="mb-6 py-2 px-6 rounded-full w-80 bg-transparent border-2 text-white" id="buscar" type="search" v-model="busqueda" placeholder="Ingresa el título del álbum">
-          </form>
-          <h1 class="text-xl font-bold text-white">{{ busqueda ? 'Resultados' : 'Buscados recientemente' }}</h1>
-          <h1 v-if="error" class="text-xl font-bold text-white">{{ error }}</h1>
-          <div v-if="busqueda && albums.length > 0" class="flex flex-wrap mt-6 gap-4">
-            <div v-if="mode === 'explore'" class="relative z-10 px-6 pt-10">
-              <h1 class="text-xl font-bold text-white">Explorar</h1>
-              <div class="flex flex-wrap mt-6 gap-4">
-                <albums 
-                    v-for="album in mode === 'search' ? albums : exploreAlbums"
-                    :id="album.id"
-                    :titulo="album.title"
-                    :artista="album.artist"
-                    :anio="album.year"
-                    :portada="album.cover"
-                    :es-favorito="isFav(album.id)"
-                    v-on:agregar="agregarFavorito(album.id)">
-                  </albums>
-              </div>
-            </div>
-          </div> -->
-        
-          <!-- <div v-else class="flex flex-wrap mt-6 gap-4">
-            <article v-for="album in favs" class="group relative">
-              <div class="absolute w-full left-7 bottom-20 translate-y-20 transition-all duration-500 opacity-0 group-hover:translate-y-28 group-hover:opacity-100 z-10">
-                <button v-on:click="agregarFavorito(album.id)" type="button" class="card-play-button text-xs font-bold rounded-full bg-green-500 p-2">
-                  <i v-bind:class="isFav(album.id) ? 'fa-solid' : 'fa-regular'" class="fa-heart"></i>
-                </button>
-              </div>
-              <a class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-lg bg-zinc-500/30 w-40 flex-col">
-                <picture class="aspect-square w-full h-auto flex-none">
-                  <img v-bind:src="album.cover" v-bind:alt="album.title" class="object-cover w-full h-full rounded-md">
-                </picture>
-                <div class="flex flex-auto flex-col px-2 truncate">
-                  <h4 class="text-white text-sm">{{ album.title }}</h4>
-                  <span class="text-xs text-gray-400">{{ album.artist }} - {{ album.year }}</span>
-                </div>
-              </a>
-            </article>
-          </div> -->
         </div>
       </main>
       <footer class="[grid-area:player] min-h-[25px] text-white text-center">

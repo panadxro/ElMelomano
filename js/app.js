@@ -1,4 +1,5 @@
 import Albums from '../components/albums.js';
+import Favs from '../components/favs.js';
 
 const app = Vue.createApp({
   data() {
@@ -8,12 +9,12 @@ const app = Vue.createApp({
         exploreAlbums: [],
         favs: [],
         error: '',
-        mode: 'search'
+        mode: 'explore'
       }
   },
   created(){
     this.leerFavoritosLocal();
-    // this.explore();
+    this.explore();
   },
   methods: {
       async searchAlbum() {
@@ -46,18 +47,16 @@ const app = Vue.createApp({
                     year: item.data.date.year,
                     cover: item.data.coverArt.sources[0].url
                 }));
-                console.log(this.albums)
               } else {
                   this.error = 'No se encontraron álbumes.';
               }
           } catch (error) {
-            console.error('Fetch error:', error);
             this.error = 'Ocurrió un error al buscar los álbumes.';
           }
       },
       async explore() {
-        const randomLetter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-        const url = `https://spotify23.p.rapidapi.com/search/?q=${randomLetter}&type=album&offset=0&limit=10`;
+        const letraRandom = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+        const url = `https://spotify23.p.rapidapi.com/search/?q=${letraRandom}&type=album&offset=0&limit=10`;
         const options = {
           method: 'GET',
           headers: {
@@ -83,7 +82,6 @@ const app = Vue.createApp({
               this.error = 'No se encontraron álbumes.';
           }
         } catch (error) {
-            console.error('Fetch error:', error);
             this.error = 'Ocurrió un error al buscar los álbumes.';
         }
       },
@@ -101,14 +99,11 @@ const app = Vue.createApp({
         return this.favs.some(album => album.id === albumId);
       },
       agregarFavorito(id) {
-        // Encontrar el índice del álbum en la lista de favoritos
         const albumIndex = this.favs.findIndex(item => item.id === id);
       
         if (albumIndex > -1) {
-          // Si el álbum ya está en favs, eliminar
           this.favs.splice(albumIndex, 1);
         } else {
-          // Si el álbum no está en favs, agregar
           let album = this.albums.find(item => item.id === id);
           if (!album) {
             album = this.exploreAlbums.find(item => item.id === id);
@@ -122,6 +117,7 @@ const app = Vue.createApp({
   },
   components: {
     'albums': Albums,
+    'favs': Favs
   }
 });
 

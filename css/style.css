@@ -10,6 +10,17 @@ html {
   grid-template-columns: 350px 1fr;
   grid-template-rows: 1fr auto;
 }
+
+@media (max-width: 641px) {
+  #app {
+    display: grid;
+    grid-template-areas: 
+      "aside main main"
+      "player player player";
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 1fr auto;
+  }
+}
 .aside-carrito {
   max-height: 80%;
 }
