@@ -1,30 +1,34 @@
+import Albums from '../components/albums.js';
+
 const app = Vue.createApp({
   data() {
       return {
-        query: '',
+        busqueda: '',
         albums: [],
         exploreAlbums: [],
         favs: [],
         error: '',
-        mode: 'explore'
+        mode: 'search'
       }
   },
   created(){
     this.leerFavoritosLocal();
-    this.explore();
+    // this.explore();
   },
   methods: {
       async searchAlbum() {
-          if (!this.query) {
-              return;
+          if (!this.busqueda) {
+            this.albums = [];
+            return
           }
           this.error = '';
           this.albums = [];
-          const url = `https://spotify23.p.rapidapi.com/search/?q=${encodeURIComponent(this.query)}&type=album&offset=0&limit=10`;
+
+          const url = `https://spotify23.p.rapidapi.com/search/?q=${encodeURIComponent(this.busqueda)}&type=album&offset=0&limit=10`;
           const options = {
               method: 'GET',
               headers: {
-                  'X-RapidAPI-Key': 'a8983f1ebcmsh5ed8930e1304c38p1f914cjsn862494adce8f',
+                  'X-RapidAPI-Key': '94b9b8f666msh537ecaf7787af34p16a305jsnf2d1b397b450',
                   'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
               }
           };
@@ -48,7 +52,7 @@ const app = Vue.createApp({
               }
           } catch (error) {
             console.error('Fetch error:', error);
-              this.error = 'Ocurrió un error al buscar los álbumes.';
+            this.error = 'Ocurrió un error al buscar los álbumes.';
           }
       },
       async explore() {
@@ -57,7 +61,7 @@ const app = Vue.createApp({
         const options = {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': 'a8983f1ebcmsh5ed8930e1304c38p1f914cjsn862494adce8f',
+            'X-RapidAPI-Key': '94b9b8f666msh537ecaf7787af34p16a305jsnf2d1b397b450',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
           }
         };
@@ -96,18 +100,18 @@ const app = Vue.createApp({
       isFav(albumId) {
         return this.favs.some(album => album.id === albumId);
       },
-      agregarFavorito(albumId) {
+      agregarFavorito(id) {
         // Encontrar el índice del álbum en la lista de favoritos
-        const albumIndex = this.favs.findIndex(item => item.id === albumId);
+        const albumIndex = this.favs.findIndex(item => item.id === id);
       
         if (albumIndex > -1) {
           // Si el álbum ya está en favs, eliminar
           this.favs.splice(albumIndex, 1);
         } else {
           // Si el álbum no está en favs, agregar
-          let album = this.albums.find(item => item.id === albumId);
+          let album = this.albums.find(item => item.id === id);
           if (!album) {
-            album = this.exploreAlbums.find(item => item.id === albumId);
+            album = this.exploreAlbums.find(item => item.id === id);
           }  
           if (album) {
             this.favs.push(album);
@@ -115,6 +119,9 @@ const app = Vue.createApp({
         }
         this.guardarFavs();
       }
+  },
+  components: {
+    'albums': Albums,
   }
 });
 
